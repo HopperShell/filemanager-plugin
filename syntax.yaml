@@ -4,6 +4,23 @@ detect:
     filename: "^filemanager$"
 
 rules:
-    # The "..", the separator line thing, and directories
-    # Optionally, add this below to highlight the ascii line: "^─*$"
-    - special: "^\\.\\.$|\\-\\s.*|\\+\\s.*"
+    # Parent directory navigation
+    - special: "^\\.\\.$"
+    # Separator line
+    - comment: "^─+$"
+    # Directories with +/- indicators
+    - special: "^\\s*(●\\s*)?\\s*(\\[.\\]\\s*)?[\\+\\-]\\s+.*/$"
+    # Git modified [M]
+    - type.keyword: "\\[M\\]"
+    # Git added [A]
+    - preproc: "\\[A\\]"
+    # Git deleted [D]
+    - error: "\\[D\\]"
+    # Git untracked [?]
+    - comment: "\\[\\?\\]"
+    # Git renamed [R]
+    - type: "\\[R\\]"
+    # Selected marker
+    - constant.string: "●"
+    # Current directory path (first line)
+    - identifier: "^/.*$"
