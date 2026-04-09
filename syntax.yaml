@@ -4,23 +4,13 @@ detect:
     filename: "^filemanager$"
 
 rules:
-    # Parent directory navigation
-    - special: "^\\.\\.$"
-    # Separator line
-    - comment: "^─+$"
-    # Directories with +/- indicators
-    - special: "^\\s*(●\\s*)?\\s*(\\[.\\]\\s*)?[\\+\\-]\\s+.*/$"
-    # Git modified [M]
-    - type.keyword: "\\[M\\]"
-    # Git added [A]
-    - preproc: "\\[A\\]"
-    # Git deleted [D]
-    - error: "\\[D\\]"
-    # Git untracked [?]
-    - comment: "\\[\\?\\]"
-    # Git renamed [R]
-    - type: "\\[R\\]"
-    # Selected marker
-    - constant.string: "●"
     # Current directory path (first line)
     - identifier: "^/.*$"
+    # Separator line
+    - comment: "^─+$"
+    # Parent directory navigation
+    - special: "^\\.\\.$"
+    # Directories with +/- indicators
+    - special: "^\\s*(●\\s*)?[\\+\\-]\\s+.*/$"
+    # Selected marker
+    - constant.string: "●"
