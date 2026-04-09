@@ -1227,6 +1227,14 @@ function preInsertTab(bp)
 	end
 end
 
+-- Enter = open file/dir
+function preInsertNewline(bp)
+	if is_tree(bp) then
+		try_open_at_y(tree_view.Cursor.Loc.Y)
+		return false
+	end
+end
+
 -- Mouse handling
 local last_mouse_y = -1
 
