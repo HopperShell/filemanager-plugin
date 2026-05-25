@@ -11,8 +11,7 @@ local runtime = import("runtime")
 -- =============================================================================
 -- CONFIGURATION
 -- =============================================================================
-
-function init()
+local function configure()
 	config.RegisterCommonOption("filemanager", "showdotfiles", true)
 
 	config.RegisterCommonOption("filemanager", "compressparent", true)
@@ -38,15 +37,7 @@ function init()
 	config.MakeCommand("bookmarks", open_bookmarks, config.NoComplete)
 
 	config.AddRuntimeFile("filemanager", config.RTSyntax, "syntax.yaml")
-
-	if config.GetGlobalOption("filemanager.openonstart") then
-		open_tree()
-		if tree_view ~= nil then
-			micro.CurPane():NextSplit()
-		end
-	end
 end
-
 -- =============================================================================
 -- STATE
 -- =============================================================================
@@ -1528,3 +1519,14 @@ function prePastePrimary(bp) return false_if_tree(bp) end
 function preMouseMultiCursor(bp) return false_if_tree(bp) end
 function preSpawnMultiCursor(bp) return false_if_tree(bp) end
 function preSelectAll(bp) return false_if_tree(bp) end
+
+
+function init()
+	configure()
+	if config.GetGlobalOption("filemanager.openonstart") then
+		open_tree()
+		if tree_view ~= nil then
+			micro.CurPane():NextSplit()
+		end
+	end
+end
